@@ -14,7 +14,7 @@ func main() {
 	}
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/{hehe:.*}", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello " + serviceName))
 		log.Println("Hello", serviceName)
 	}).Methods("GET")

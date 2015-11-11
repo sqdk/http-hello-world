@@ -12,6 +12,11 @@ func main() {
 	if os.Getenv("SERVICE_NAME") != "" {
 		serviceName = os.Getenv("SERVICE_NAME")
 	}
+	
+	servicePort := "80"
+	if os.Getenv("SERVICE_PORT") != "" {
+		servicePort = os.Getenv("SERVICE_PORT")
+	}
 
 	r := mux.NewRouter()
 	r.HandleFunc("/{hehe:.*}", func(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +24,7 @@ func main() {
 		log.Println("Hello", serviceName)
 	}).Methods("GET")
 
-	err := http.ListenAndServe(":80", r)
+	err := http.ListenAndServe(":"+servicePort, r)
 	if err != nil {
 		log.Println(err)
 	}
